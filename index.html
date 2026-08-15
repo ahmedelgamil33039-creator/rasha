@@ -491,9 +491,9 @@
         </div>
     </div>
 
-    <!-- SYSTEM ENGINE SCRIPT -->
+    <!-- SCRIPT ENGINE -->
     <script>
-        // --- 1. CLOUD SYNC CONFIGURATION (JSONBIN) ---
+        // --- 1. CLOUD SYNC CONFIGURATION (JSONBIN DIRECT REST API) ---
         const JSONBIN_API_KEY = "$2a$10$RdouQl2lFIUQ7zOeHJ69zer96s0S2oxwvv34KT7R3055iiHS52Y7O";
         const JSONBIN_BIN_ID = "6a80639cf5f4af5e2919f2e7";
 
@@ -616,19 +616,23 @@
             results: []
         };
 
-        // Cloud Sync Functions
+        // Cloud Data Synchronization
         async function fetchCloudData() {
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY,
+                        'X-Bin-Meta': 'false'
+                    }
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    if (data.record && Object.keys(data.record).length > 2) {
-                        DB = data.record;
-                        if (!DB.results) DB.results = [];
-                        if (!DB.students) DB.students = [];
-                        if (!DB.questions) DB.questions = [];
+                    if (data && (data.questions || data.config)) {
+                        DB.config = data.config || DEFAULT_CONFIG;
+                        DB.students = data.students || DEFAULT_STUDENTS;
+                        DB.questions = data.questions || DEFAULT_QUESTIONS;
+                        DB.results = data.results || [];
                     } else {
                         await persistDB();
                     }
@@ -646,7 +650,7 @@
         async function persistDB() {
             localStorage.setItem('quiz_safe_cloud_db', JSON.stringify(DB));
             try {
-                await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -654,8 +658,11 @@
                     },
                     body: JSON.stringify(DB)
                 });
+                if (!res.ok) {
+                    console.error("Cloud persist failed with status:", res.status);
+                }
             } catch(e) {
-                console.error("Cloud persist error:", e);
+                console.error("Cloud persist network error:", e);
             }
         }
 
@@ -1062,7 +1069,7 @@
             navigateTo('screen-result');
         }
 
-        // --- ADMIN PANEL FUNCTIONS ---
+        // --- ADMIN PANEL CONTROLLER ---
         function openAdminModal() {
             playSound('click');
             document.getElementById('admin-passcode-input').value = '';
@@ -1400,7 +1407,7 @@
             link.click();
         }
 
-        // Initialize App
+        // Initialize App on Window Load
         window.onload = () => {
             fetchCloudData();
         };
