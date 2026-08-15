@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة مس رشا دياب للاختبارات الإلكترونية</title>
+    <title>منصة مس رشا دياب - اختبارات الصف الرابع الابتدائي</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Tajawal Font -->
@@ -11,55 +11,43 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Tajawal', 'sans-serif'] },
-                    colors: {
-                        brand: { 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
             user-select: none;
             -webkit-user-select: none;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #042f2e 0%, #065f46 50%, #022c22 100%);
             min-height: 100vh;
             color: #f8fafc;
             overflow-x: hidden;
         }
         .glass-card {
-            background: rgba(30, 41, 59, 0.85);
+            background: rgba(6, 78, 59, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.25);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
         .glass-modal {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(2, 44, 34, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(52, 211, 153, 0.4);
         }
         .btn-3d {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.15s ease-out;
             transform: translateY(0);
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
         }
         .btn-3d:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55);
         }
         .btn-3d:active {
             transform: translateY(1px);
         }
         .text-glow {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            text-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
         }
         .wrap-safe {
             overflow-wrap: break-word;
@@ -70,12 +58,6 @@
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-
-    <!-- Loading Indicator -->
-    <div id="cloud-loader" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center gap-3">
-        <i class="fa-solid fa-cloud-arrow-down text-sky-400 text-4xl animate-bounce"></i>
-        <div class="text-sm font-bold text-slate-300">جاري الاتصال السحابي بجداول بيانات Google...</div>
-    </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 transform -translate-y-20 opacity-0 pointer-events-none px-6 py-3 rounded-2xl glass-card flex items-center gap-3 border shadow-2xl">
@@ -88,43 +70,47 @@
 
         <!-- SCREEN 1: HOME & LOGIN -->
         <section id="screen-home" class="w-full space-y-6">
-            <div class="glass-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden border border-slate-700/60">
+            <div class="glass-card rounded-3xl p-4 sm:p-8 text-center relative overflow-hidden border border-emerald-500/30">
                 <div class="flex justify-between items-center mb-4">
                     <span id="display-badge-status" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                         <i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i> متاح للطلاب
                     </span>
-                    <button onclick="openAdminModal()" class="text-slate-400 hover:text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-800/60 transition">
-                        <i class="fa-solid fa-user-shield ml-1 text-sky-400"></i> الإدارة
+                    <button onclick="openAdminModal()" class="text-emerald-300 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-950/60 transition">
+                        <i class="fa-solid fa-user-shield ml-1 text-emerald-400"></i> الإدارة
                     </button>
                 </div>
 
-                <div class="w-full max-h-56 sm:max-h-64 rounded-2xl overflow-hidden mb-6 border border-slate-700 shadow-lg bg-slate-900 flex justify-center items-center">
-                    <img id="display-quiz-banner" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop" alt="واجهة الاختبار" class="w-full h-full object-cover">
+                <!-- Banner Image -->
+                <div class="w-full rounded-2xl overflow-hidden mb-6 border border-emerald-500/30 shadow-2xl bg-slate-950 flex justify-center items-center">
+                    <img id="display-quiz-banner" 
+                         src="https://i.postimg.cc/Y2FdWsdv/ghlaf.jpg" 
+                         alt="غلاف الاختبار" 
+                         class="w-full h-auto aspect-video object-contain">
                 </div>
 
-                <h1 id="display-quiz-title" class="text-2xl sm:text-3xl font-black text-sky-300 text-glow leading-snug mb-2 wrap-safe">
+                <h1 id="display-quiz-title" class="text-2xl sm:text-3xl font-black text-emerald-200 text-glow leading-snug mb-2 wrap-safe">
                     اختبار الصف الرابع الابتدائي في الدراسات الاجتماعية
                 </h1>
-                <div class="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-300 font-medium mb-6">
-                    <span><i class="fa-solid fa-chalkboard-user text-sky-400 ml-1"></i> <span id="display-teacher-name">مس رشا دياب</span></span>
+                <div class="flex items-center justify-center gap-4 text-xs sm:text-sm text-emerald-200/80 font-medium mb-6">
+                    <span><i class="fa-solid fa-chalkboard-user text-emerald-400 ml-1"></i> <span id="display-teacher-name">مس رشا دياب</span></span>
                     <span>|</span>
                     <span><i class="fa-solid fa-phone text-emerald-400 ml-1"></i> <span id="display-teacher-phone">01205333472</span></span>
                 </div>
 
                 <div class="max-w-md mx-auto space-y-4 text-right">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">اختر اسم الطالب:</label>
+                        <label class="block text-xs font-bold text-emerald-200 mb-1">اختر اسم الطالب:</label>
                         <div class="relative">
-                            <select id="select-student" class="w-full bg-slate-800/90 text-white font-bold p-3.5 rounded-2xl border border-slate-600 focus:outline-none focus:border-sky-400 transition text-sm appearance-none cursor-pointer">
+                            <select id="select-student" class="w-full bg-slate-900/90 text-white font-bold p-3.5 rounded-2xl border border-emerald-500/40 focus:outline-none focus:border-emerald-400 transition text-sm appearance-none cursor-pointer">
                                 <option value="">-- اختر اسمك من القائمة --</option>
                             </select>
-                            <i class="fa-solid fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
+                            <i class="fa-solid fa-chevron-down absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400 pointer-events-none text-xs"></i>
                         </div>
                     </div>
 
-                    <button onclick="handleStartClick()" class="w-full btn-3d bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-black py-4 rounded-2xl text-lg flex items-center justify-center gap-2 border border-sky-300/30">
+                    <button onclick="handleStartClick()" class="w-full btn-3d bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-4 rounded-2xl text-lg flex items-center justify-center gap-2 border border-emerald-400/30">
                         <i class="fa-solid fa-bolt-lightning text-yellow-300"></i>
-                        <span>بدء الاختبار</span>
+                        <span>بدء اختبار الصف الرابع</span>
                     </button>
                 </div>
             </div>
@@ -132,14 +118,14 @@
 
         <!-- SCREEN 2: ACTIVE QUIZ -->
         <section id="screen-quiz" class="w-full space-y-4 hidden">
-            <div class="glass-card rounded-2xl p-4 flex justify-between items-center border border-slate-700/60">
+            <div class="glass-card rounded-2xl p-4 flex justify-between items-center border border-emerald-500/30">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <div class="overflow-hidden">
-                        <div class="text-xs text-slate-400 truncate" id="quiz-header-teacher">مس رشا دياب</div>
-                        <div class="text-sm font-bold text-sky-300 truncate" id="quiz-header-student">طالب</div>
+                        <div class="text-xs text-emerald-300 truncate" id="quiz-header-teacher">مس رشا دياب</div>
+                        <div class="text-sm font-bold text-emerald-100 truncate" id="quiz-header-student">طالب</div>
                     </div>
                 </div>
 
@@ -148,16 +134,16 @@
                         <i class="fa-solid fa-clock animate-pulse text-red-400"></i>
                         <span id="quiz-timer">29:59</span>
                     </div>
-                    <div class="bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-xl font-bold text-xs">
-                        <span id="quiz-question-counter">السؤال 1 من 10</span>
+                    <div class="bg-emerald-950/80 text-emerald-200 border border-emerald-500/40 px-3 py-1.5 rounded-xl font-bold text-xs">
+                        <span id="quiz-question-counter">السؤال 1 من 4</span>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl p-5 sm:p-8 space-y-6 border border-slate-700/80">
+            <div class="glass-card rounded-3xl p-5 sm:p-8 space-y-6 border border-emerald-500/40">
                 <div class="flex items-center justify-between">
-                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-300 border border-sky-500/20" id="quiz-q-type">سؤال</span>
-                    <span class="text-xs font-semibold text-slate-400">الدرجة: <span id="quiz-q-points" class="text-sky-300 font-bold">1</span></span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="quiz-q-type">سؤال</span>
+                    <span class="text-xs font-semibold text-emerald-300">الدرجة: <span id="quiz-q-points" class="text-emerald-200 font-bold">1</span></span>
                 </div>
 
                 <div class="w-full py-2 text-center">
@@ -166,14 +152,14 @@
                     </h2>
                 </div>
 
-                <div id="quiz-q-image-wrap" class="hidden w-full max-h-56 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 flex justify-center items-center">
+                <div id="quiz-q-image-wrap" class="hidden w-full max-h-56 rounded-xl overflow-hidden bg-slate-900 border border-emerald-500/30 flex justify-center items-center">
                     <img id="quiz-q-image" src="" alt="صورة السؤال" class="max-h-56 object-contain">
                 </div>
 
                 <div id="quiz-options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2"></div>
 
-                <div class="pt-4 border-t border-slate-700/50 flex justify-end">
-                    <button onclick="confirmExitQuiz()" class="text-slate-400 hover:text-red-400 text-xs font-bold px-4 py-2 rounded-xl transition">
+                <div class="pt-4 border-t border-emerald-500/30 flex justify-end">
+                    <button onclick="confirmExitQuiz()" class="text-emerald-300 hover:text-red-400 text-xs font-bold px-4 py-2 rounded-xl transition">
                         <i class="fa-solid fa-flag-checkered ml-1"></i> إنهاء الاختبار
                     </button>
                 </div>
@@ -182,19 +168,19 @@
 
         <!-- SCREEN 3: RESULTS SCREEN -->
         <section id="screen-result" class="w-full space-y-6 hidden">
-            <div class="glass-card rounded-3xl p-6 sm:p-8 text-center border border-slate-700/80 space-y-6">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 text-center border border-emerald-500/40 space-y-6">
                 <div id="result-status-icon" class="w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-xl">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
 
                 <div>
                     <h2 id="result-headline" class="text-2xl sm:text-3xl font-black text-white mb-2 wrap-safe">ممتاز يا بطل!</h2>
-                    <p id="result-message" class="text-sm text-slate-300 max-w-md mx-auto leading-relaxed wrap-safe">رسالة التحفيز...</p>
+                    <p id="result-message" class="text-sm text-emerald-200 max-w-md mx-auto leading-relaxed wrap-safe">رسالة التحفيز...</p>
                 </div>
 
-                <div class="bg-slate-900/80 rounded-2xl p-6 border border-slate-700 inline-block px-12 shadow-inner">
-                    <div class="text-xs font-bold text-slate-400 mb-1">الدرجة النهائية</div>
-                    <div class="text-4xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight" id="result-score">0 / 0</div>
+                <div class="bg-emerald-950/80 rounded-2xl p-6 border border-emerald-500/40 inline-block px-12 shadow-inner">
+                    <div class="text-xs font-bold text-emerald-300 mb-1">الدرجة النهائية</div>
+                    <div class="text-4xl sm:text-5xl font-black text-emerald-300 font-mono tracking-tight" id="result-score">0 / 0</div>
                     <div class="text-sm font-bold text-emerald-400 mt-2" id="result-percent">النسبة المئوية: 0%</div>
                 </div>
 
@@ -211,100 +197,122 @@
                         <span class="text-xs text-amber-400 block font-bold">غير مجاب</span>
                         <span class="text-xl font-bold text-white font-mono" id="result-stat-unanswered">0</span>
                     </div>
-                    <div class="bg-sky-500/10 border border-sky-500/20 p-3 rounded-2xl">
-                        <span class="text-xs text-sky-400 block font-bold">إجمالي الأسئلة</span>
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-2xl">
+                        <span class="text-xs text-emerald-300 block font-bold">إجمالي الأسئلة</span>
                         <span class="text-xl font-bold text-white font-mono" id="result-stat-total">0</span>
                     </div>
                 </div>
 
                 <div class="text-right space-y-3 pt-4">
-                    <h3 class="text-base font-bold text-sky-300"><i class="fa-solid fa-list-check ml-2"></i> تفاصيل الإجابات:</h3>
+                    <h3 class="text-base font-bold text-emerald-300"><i class="fa-solid fa-list-check ml-2"></i> تفاصيل الإجابات:</h3>
                     <div id="result-breakdown" class="space-y-3 max-h-80 overflow-y-auto pr-1"></div>
                 </div>
 
-                <button onclick="navigateTo('screen-home')" class="w-full btn-3d bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 rounded-2xl transition border border-slate-600">
+                <button onclick="navigateTo('screen-home')" class="w-full btn-3d bg-emerald-900/60 hover:bg-emerald-800 text-white font-bold py-3.5 rounded-2xl transition border border-emerald-500/40">
                     العودة للشاشة الرئيسية
                 </button>
             </div>
         </section>
 
-        <!-- SCREEN 4: ADMIN DASHBOARD -->
+        <!-- SCREEN 4: COMPLETE ADMIN DASHBOARD -->
         <section id="screen-admin" class="w-full space-y-6 hidden">
-            <div class="glass-card rounded-3xl p-6 border border-slate-700/80 space-y-6">
-                <div class="flex flex-wrap justify-between items-center gap-4 pb-4 border-b border-slate-700">
+            <div class="glass-card rounded-3xl p-6 border border-emerald-500/40 space-y-6">
+                
+                <!-- HEADER -->
+                <div class="flex flex-wrap justify-between items-center gap-4 pb-4 border-b border-emerald-500/30">
                     <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
-                            <i class="fa-solid fa-table"></i>
+                        <div class="w-12 h-12 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <div>
-                            <h2 class="text-xl font-black text-white">لوحة تحكم مس رشا دياب (Google Sheets سحابية)</h2>
-                            <p class="text-xs text-slate-400">حفظ دائم متصل مباشرة بحساب Google</p>
+                            <h2 class="text-xl font-black text-white">لوحة تحكم الصف الرابع الابتدائي</h2>
+                            <p class="text-xs text-emerald-300">متصلة سحابياً ومحلياً بجداول بيانات Google</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="previewQuiz()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+                        <button onclick="previewQuiz()" class="bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1.5">
                             <i class="fa-solid fa-eye"></i> معاينة
                         </button>
-                        <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-bold px-3 py-2 rounded-xl transition">
+                        <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-bold px-4 py-2 rounded-xl transition">
                             <i class="fa-solid fa-arrow-right-from-bracket ml-1"></i> خروج
                         </button>
                     </div>
                 </div>
 
-                <div class="flex gap-2 overflow-x-auto pb-2 border-b border-slate-700 text-xs font-bold">
-                    <button onclick="switchAdminTab('settings')" id="admin-tab-btn-settings" class="admin-tab-btn px-4 py-2 rounded-xl bg-sky-500 text-white whitespace-nowrap">إدارة الاختبار</button>
-                    <button onclick="switchAdminTab('questions')" id="admin-tab-btn-questions" class="admin-tab-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">إدارة الأسئلة</button>
-                    <button onclick="switchAdminTab('students')" id="admin-tab-btn-students" class="admin-tab-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">إدارة الطلاب</button>
-                    <button onclick="switchAdminTab('banned')" id="admin-tab-btn-banned" class="admin-tab-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">الطلاب المحظورون</button>
-                    <button onclick="switchAdminTab('results')" id="admin-tab-btn-results" class="admin-tab-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">النتائج والتقارير</button>
+                <!-- ADMIN TABS -->
+                <div class="flex gap-2 overflow-x-auto pb-2 border-b border-emerald-500/30 text-xs font-bold">
+                    <button onclick="switchAdminTab('settings')" id="admin-tab-btn-settings" class="admin-tab-btn px-4 py-2.5 rounded-xl bg-emerald-600 text-white whitespace-nowrap">
+                        <i class="fa-solid fa-sliders ml-1"></i> إدارة الاختبار
+                    </button>
+                    <button onclick="switchAdminTab('questions')" id="admin-tab-btn-questions" class="admin-tab-btn px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">
+                        <i class="fa-solid fa-file-circle-question ml-1"></i> إدارة الأسئلة
+                    </button>
+                    <button onclick="switchAdminTab('students')" id="admin-tab-btn-students" class="admin-tab-btn px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">
+                        <i class="fa-solid fa-users ml-1"></i> إدارة الطلاب
+                    </button>
+                    <button onclick="switchAdminTab('banned')" id="admin-tab-btn-banned" class="admin-tab-btn px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">
+                        <i class="fa-solid fa-ban ml-1"></i> المحظورون
+                    </button>
+                    <button onclick="switchAdminTab('results')" id="admin-tab-btn-results" class="admin-tab-btn px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap">
+                        <i class="fa-solid fa-square-poll-vertical ml-1"></i> النتائج والتقارير
+                    </button>
                 </div>
 
                 <!-- TAB 1: SETTINGS -->
                 <div id="admin-tab-settings" class="admin-tab-content space-y-4 text-right">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">اسم الاختبار</label>
-                            <input type="text" id="admin-input-title" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">اسم الاختبار</label>
+                            <input type="text" id="admin-input-title" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">الصف الدراسي</label>
-                            <input type="text" id="admin-input-grade" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">الصف الدراسي</label>
+                            <input type="text" id="admin-input-grade" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">المادة</label>
-                            <input type="text" id="admin-input-subject" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">المادة</label>
+                            <input type="text" id="admin-input-subject" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">اسم المعلمة</label>
-                            <input type="text" id="admin-input-teacher" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">اسم المعلمة</label>
+                            <input type="text" id="admin-input-teacher" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">رقم الهاتف</label>
-                            <input type="text" id="admin-input-phone" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">رقم الهاتف</label>
+                            <input type="text" id="admin-input-phone" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">مدة الاختبار (بالدقائق)</label>
-                            <input type="number" id="admin-input-duration" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">مدة الاختبار (بالدقائق)</label>
+                            <input type="number" id="admin-input-duration" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
-                        <div class="sm:col-span-2">
-                            <label class="block text-xs font-bold text-slate-300 mb-1">رابط صورة واجهة الاختبار</label>
-                            <input type="text" id="admin-input-banner" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                        
+                        <!-- Banner Image Control with Live Preview -->
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="block text-xs font-bold text-emerald-200">رابط صورة واجهة الاختبار</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="admin-input-banner" oninput="previewBannerInput(this.value)" placeholder="https://..." class="flex-1 bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
+                            </div>
+                            <div class="w-full rounded-xl bg-slate-900 border border-emerald-500/30 overflow-hidden flex items-center justify-center p-2">
+                                <img id="admin-banner-preview" src="" alt="معاينة الصورة" class="max-h-48 w-full object-contain">
+                                <span id="admin-banner-fallback" class="text-xs text-slate-500">معاينة الصورة</span>
+                            </div>
                         </div>
+
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">حالة نشر الاختبار</label>
-                            <select id="admin-input-status" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">حالة نشر الاختبار</label>
+                            <select id="admin-input-status" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                                 <option value="published">منشور للطلاب</option>
                                 <option value="draft">مسودة (غير متاح)</option>
                                 <option value="closed">مغلق</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 mb-1">الرقم السري الجديد للإدارة</label>
-                            <input type="password" id="admin-input-newpass" placeholder="اتركه فارغاً إن لم ترغب في التغيير" class="w-full bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-sm text-white">
+                            <label class="block text-xs font-bold text-emerald-200 mb-1">الرقم السري الجديد للإدارة</label>
+                            <input type="password" id="admin-input-newpass" placeholder="اتركه فارغاً إن لم ترغب في التغيير" class="w-full bg-slate-900 border border-emerald-500/40 p-2.5 rounded-xl text-sm text-white">
                         </div>
                     </div>
 
-                    <div class="pt-4 flex flex-wrap justify-between items-center gap-3">
+                    <div class="pt-4">
                         <button onclick="saveAdminSettings()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition">
                             <i class="fa-solid fa-cloud-arrow-up ml-1"></i> حفظ وتحديث سحابي فوري
                         </button>
@@ -313,20 +321,38 @@
 
                 <!-- TAB 2: QUESTIONS -->
                 <div id="admin-tab-questions" class="admin-tab-content space-y-6 hidden text-right">
-                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700 space-y-3">
-                        <h4 class="font-bold text-sm text-sky-400" id="q-form-title">إضافة سؤال جديد</h4>
+                    
+                    <div class="p-4 bg-emerald-950/70 rounded-2xl border border-emerald-500/40 flex flex-wrap items-center justify-between gap-3">
+                        <div class="space-y-0.5">
+                            <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                                <i class="fa-solid fa-shuffle text-emerald-400"></i> نظام الترتيب العشوائي للاختبار
+                            </h4>
+                            <p class="text-[11px] text-emerald-300">تغيير ترتيب الأسئلة والخيارات عشوائياً لكل طالب ولمنع الغش عند الإعادة.</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleRandomMode()" id="btn-toggle-random" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-600 text-white shadow-md">
+                                <i id="icon-toggle-random" class="fa-solid fa-check"></i>
+                                <span id="text-toggle-random">مفعل (ترتيب عشوائي)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/30 space-y-3">
+                        <h4 class="font-bold text-sm text-emerald-300" id="q-form-title">إضافة سؤال جديد</h4>
                         <input type="hidden" id="admin-q-id">
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">نوع السؤال</label>
+                            <label class="block text-xs text-emerald-300 mb-1">نوع السؤال</label>
                             <select id="admin-q-type" onchange="handleQTypeChange()" class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white">
-                                <option value="mcq">اختيار من أربعة</option>
+                                <option value="mcq">اختيار من متعدد</option>
                                 <option value="true_false">صح أو خطأ</option>
-                                <option value="complete">أكمل باختيار من أربعة</option>
-                                <option value="error_correction">اكتشف أو صوب الخطأ بأربعة اختيارات</option>
+                                <option value="complete">أكمل العبارة</option>
+                                <option value="error_correction">تصويب الخطأ</option>
+                                <option value="what_results">ما النتائج المترتبة على (باختيارات 4)</option>
+                                <option value="why_explain">بما تفسر (باختيارات 4)</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">نص السؤال</label>
+                            <label class="block text-xs text-emerald-300 mb-1">نص السؤال</label>
                             <textarea id="admin-q-text" rows="3" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-xl text-sm text-white wrap-safe"></textarea>
                         </div>
                         <div id="admin-q-options-wrap" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -337,7 +363,7 @@
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <div>
-                                <label class="block text-xs text-slate-400 mb-1">الإجابة الصحيحة</label>
+                                <label class="block text-xs text-emerald-300 mb-1">الإجابة الصحيحة</label>
                                 <select id="admin-q-correct" class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white">
                                     <option value="0">الخيار 1</option>
                                     <option value="1">الخيار 2</option>
@@ -346,42 +372,42 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs text-slate-400 mb-1">درجة السؤال</label>
-                                <input type="number" id="admin-q-points" value="1" min="1" class="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-xl text-xs text-white">
+                                <label class="block text-xs text-emerald-300 mb-1">درجة السؤال</label>
+                                <input type="number" id="admin-q-points" value="1" min="1" class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white">
                             </div>
                             <div>
-                                <label class="block text-xs text-slate-400 mb-1">رابط صورة (اختياري)</label>
+                                <label class="block text-xs text-emerald-300 mb-1">رابط صورة (اختياري)</label>
                                 <input type="text" id="admin-q-image" placeholder="https://..." class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white">
                             </div>
                         </div>
                         <div class="flex gap-2 pt-2">
-                            <button onclick="saveQuestion()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">حفظ السؤال سحابياً</button>
+                            <button onclick="saveQuestion()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">حفظ السؤال</button>
                             <button onclick="resetQuestionForm()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-xl text-xs transition">إلغاء</button>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <h4 class="font-bold text-sm text-slate-300">الأسئلة الحالية (<span id="admin-q-count">0</span>)</h4>
+                        <h4 class="font-bold text-sm text-emerald-200">الأسئلة الحالية (<span id="admin-q-count">0</span>)</h4>
                         <div id="admin-questions-list" class="space-y-2 max-h-80 overflow-y-auto pr-1"></div>
                     </div>
                 </div>
 
                 <!-- TAB 3: STUDENTS -->
                 <div id="admin-tab-students" class="admin-tab-content space-y-4 hidden text-right">
-                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-slate-700 flex flex-wrap gap-2 items-end">
+                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/30 flex flex-wrap gap-2 items-end">
                         <div class="flex-1 min-w-[150px]">
-                            <label class="block text-xs text-slate-400 mb-1">اسم الطالب</label>
+                            <label class="block text-xs text-emerald-300 mb-1">اسم الطالب</label>
                             <input type="text" id="admin-new-student-name" class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white">
                         </div>
                         <div class="w-32">
-                            <label class="block text-xs text-slate-400 mb-1">الرقم السري</label>
+                            <label class="block text-xs text-emerald-300 mb-1">الرقم السري</label>
                             <input type="text" id="admin-new-student-pass" placeholder="1234" class="w-full bg-slate-800 border border-slate-700 p-2 rounded-xl text-xs text-white text-center font-mono">
                         </div>
                         <button onclick="addStudent()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">إضافة طالب</button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs text-right text-slate-300">
-                            <thead class="bg-slate-900 border-b border-slate-700 text-slate-400">
+                            <thead class="bg-slate-900 border-b border-emerald-500/30 text-emerald-300">
                                 <tr>
                                     <th class="p-2.5">المعرف</th>
                                     <th class="p-2.5">الاسم</th>
@@ -397,15 +423,15 @@
 
                 <!-- TAB 4: BANNED -->
                 <div id="admin-tab-banned" class="admin-tab-content space-y-4 hidden text-right">
-                    <h4 class="font-bold text-sm text-red-400"><i class="fa-solid fa-ban ml-1"></i> قائمة الطلاب المحظورين</h4>
+                    <h4 class="font-bold text-sm text-red-400"><i class="fa-solid fa-ban ml-1"></i> قائمة الطلاب المحظورين ومن أتموا الاختبار</h4>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs text-right text-slate-300">
-                            <thead class="bg-slate-900 border-b border-slate-700 text-slate-400">
+                            <thead class="bg-slate-900 border-b border-emerald-500/30 text-emerald-300">
                                 <tr>
                                     <th class="p-2.5">الاسم</th>
-                                    <th class="p-2.5">سبب الحظر</th>
-                                    <th class="p-2.5">وقت الحظر</th>
-                                    <th class="p-2.5">إجراء</th>
+                                    <th class="p-2.5">سبب الحظر / الحالة</th>
+                                    <th class="p-2.5">التوقيت</th>
+                                    <th class="p-2.5">إجراء الإدارة</th>
                                 </tr>
                             </thead>
                             <tbody id="admin-banned-tbody" class="divide-y divide-slate-800"></tbody>
@@ -415,22 +441,27 @@
 
                 <!-- TAB 5: RESULTS -->
                 <div id="admin-tab-results" class="admin-tab-content space-y-4 hidden text-right">
-                    <div class="flex justify-between items-center">
-                        <h4 class="font-bold text-sm text-sky-400">سجل نتائج الطلاب المباشر</h4>
-                        <button onclick="exportResultsCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition">
-                            <i class="fa-solid fa-file-excel ml-1"></i> تصدير Excel (CSV)
-                        </button>
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <h4 class="font-bold text-sm text-emerald-300">سجل نتائج طلاب الصف الرابع</h4>
+                        <div class="flex gap-2">
+                            <button onclick="clearAllResults()" class="bg-red-600/30 hover:bg-red-600 text-red-200 border border-red-500/40 font-bold px-3 py-1.5 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-trash-can ml-1"></i> حذف جميع النتائج
+                            </button>
+                            <button onclick="exportResultsCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-file-excel ml-1"></i> تصدير Excel (CSV)
+                            </button>
+                        </div>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs text-right text-slate-300">
-                            <thead class="bg-slate-900 border-b border-slate-700 text-slate-400">
+                            <thead class="bg-slate-900 border-b border-emerald-500/30 text-emerald-300">
                                 <tr>
                                     <th class="p-2.5">الطالب</th>
                                     <th class="p-2.5">الدرجة</th>
                                     <th class="p-2.5">النسبة</th>
                                     <th class="p-2.5">صواب/خطأ</th>
                                     <th class="p-2.5">التاريخ</th>
-                                    <th class="p-2.5">التفاصيل</th>
+                                    <th class="p-2.5">إجراءات / عرض الورقة</th>
                                 </tr>
                             </thead>
                             <tbody id="admin-results-tbody" class="divide-y divide-slate-800"></tbody>
@@ -442,32 +473,33 @@
 
     </div>
 
-    <!-- MODALS -->
+    <!-- MODAL 1: PASSCODE -->
     <div id="modal-passcode" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
-        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-slate-700 shadow-2xl">
-            <div class="w-12 h-12 bg-sky-500/20 text-sky-400 rounded-2xl mx-auto flex items-center justify-center text-xl">
+        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-emerald-500/30 shadow-2xl">
+            <div class="w-12 h-12 bg-emerald-500/20 text-emerald-300 rounded-2xl mx-auto flex items-center justify-center text-xl">
                 <i class="fa-solid fa-key"></i>
             </div>
             <h3 class="font-bold text-lg text-white">التحقق من هوية الطالب</h3>
-            <p class="text-xs text-slate-400 wrap-safe" id="passcode-student-label">أدخل الرقم السري</p>
-            <input type="password" id="student-passcode-input" placeholder="••••" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-2xl text-center text-xl font-mono text-white tracking-widest focus:outline-none focus:border-sky-400">
+            <p class="text-xs text-emerald-300 wrap-safe" id="passcode-student-label">أدخل الرقم السري</p>
+            <input type="password" id="student-passcode-input" placeholder="••••" class="w-full bg-slate-900 border border-emerald-500/40 p-3 rounded-2xl text-center text-xl font-mono text-white tracking-widest focus:outline-none focus:border-emerald-400">
             <div class="flex gap-2">
                 <button onclick="closePasscodeModal()" class="w-1/2 bg-slate-800 text-slate-300 py-2.5 rounded-xl text-xs font-bold">إلغاء</button>
-                <button onclick="verifyStudentPasscode()" class="w-1/2 bg-sky-600 hover:bg-sky-500 text-white py-2.5 rounded-xl text-xs font-bold">تحقق ومتابعة</button>
+                <button onclick="verifyStudentPasscode()" class="w-1/2 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-xs font-bold">تحقق ومتابعة</button>
             </div>
         </div>
     </div>
 
+    <!-- MODAL 2: READY PROMPT -->
     <div id="modal-ready" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
-        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-slate-700 shadow-2xl">
+        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-emerald-500/30 shadow-2xl">
             <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl mx-auto flex items-center justify-center text-xl">
                 <i class="fa-solid fa-circle-question"></i>
             </div>
             <h3 class="font-bold text-lg text-white">هل أنت مستعد لبدء الاختبار؟</h3>
-            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1.5 text-right">
-                <div class="flex justify-between"><span>عدد الأسئلة:</span> <span id="ready-q-count" class="font-bold text-sky-300">10 أسئلة</span></div>
-                <div class="flex justify-between"><span>مدة الاختبار:</span> <span id="ready-duration" class="font-bold text-sky-300">30 دقيقة</span></div>
-                <div class="text-[11px] text-amber-400/90 pt-1">تنبيه: لا يمكن الرجوع للسؤال السابق بعد الإجابة.</div>
+            <div class="bg-slate-900/80 p-3 rounded-xl border border-emerald-500/30 text-xs text-emerald-200 space-y-1.5 text-right">
+                <div class="flex justify-between"><span>عدد الأسئلة:</span> <span id="ready-q-count" class="font-bold text-emerald-300">4 أسئلة</span></div>
+                <div class="flex justify-between"><span>مدة الاختبار:</span> <span id="ready-duration" class="font-bold text-emerald-300">30 دقيقة</span></div>
+                <div class="text-[11px] text-amber-300 pt-1">تنبيه: لا يمكن الرجوع للسؤال السابق بعد الإجابة.</div>
             </div>
             <div class="flex gap-2">
                 <button onclick="closeReadyModal()" class="w-1/2 bg-slate-800 text-slate-300 py-2.5 rounded-xl text-xs font-bold">إلغاء</button>
@@ -476,80 +508,138 @@
         </div>
     </div>
 
+    <!-- MODAL 3: ELEGANT PREVIOUS ATTEMPT & BAN CARD -->
+    <div id="modal-student-blocked" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md hidden">
+        <div class="glass-modal rounded-3xl p-6 max-w-md w-full text-center space-y-5 border border-emerald-500/40 shadow-2xl">
+            <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-3xl mx-auto flex items-center justify-center text-2xl border border-amber-500/30">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+                <h3 class="font-black text-xl text-white mb-1" id="blocked-modal-title">تنبيه أداء الاختبار</h3>
+                <p class="text-xs text-emerald-200 leading-relaxed" id="blocked-modal-msg">لقد قمت بأداء هذا الاختبار مسبقاً.</p>
+            </div>
+
+            <!-- Score box -->
+            <div id="blocked-modal-scorebox" class="bg-emerald-950/80 p-4 rounded-2xl border border-emerald-500/30 space-y-2 text-right">
+                <div class="flex justify-between text-xs"><span class="text-emerald-300">اسم الطالب:</span> <span class="font-bold text-white" id="blocked-student-name">-</span></div>
+                <div class="flex justify-between text-xs"><span class="text-emerald-300">الدرجة المحققة:</span> <span class="font-bold text-emerald-400 font-mono" id="blocked-student-score">-</span></div>
+                <div class="flex justify-between text-xs"><span class="text-emerald-300">النسبة المئوية:</span> <span class="font-bold text-emerald-300 font-mono" id="blocked-student-percent">-</span></div>
+                <div class="flex justify-between text-xs"><span class="text-emerald-300">توقيت الاختبار:</span> <span class="text-slate-400 font-mono text-[11px]" id="blocked-student-time">-</span></div>
+            </div>
+
+            <div class="text-[11px] text-amber-300 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20">
+                <i class="fa-solid fa-lock ml-1"></i> لإعادة أداء الاختبار مرة أخرى، يرجى مراجعة المعلمة لفك القيد من لوحة الإدارة.
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="closeBlockedModal()" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white py-3 rounded-xl text-xs font-bold transition">حسناً، فهمت</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ADMIN LOGIN -->
     <div id="modal-admin-auth" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden">
-        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-slate-700 shadow-2xl">
-            <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-2xl mx-auto flex items-center justify-center text-xl">
+        <div class="glass-modal rounded-3xl p-6 max-w-sm w-full text-center space-y-4 border border-emerald-500/30 shadow-2xl">
+            <div class="w-12 h-12 bg-emerald-500/20 text-emerald-300 rounded-2xl mx-auto flex items-center justify-center text-xl">
                 <i class="fa-solid fa-lock"></i>
             </div>
-            <h3 class="font-bold text-lg text-white">دخول لوحة الإدارة</h3>
-            <p class="text-xs text-slate-400">أدخل الرقم السري الإداري الخاص بمس رشا</p>
-            <input type="password" id="admin-passcode-input" placeholder="الافتراضي: 330399" class="w-full bg-slate-900 border border-slate-700 p-3 rounded-2xl text-center text-base font-mono text-white tracking-wider focus:outline-none focus:border-purple-400">
+            <h3 class="font-bold text-lg text-white">دخول لوحة إدارة الصف الرابع</h3>
+            <p class="text-xs text-emerald-300">أدخل الرقم السري الإداري</p>
+            <input type="password" id="admin-passcode-input" autocomplete="new-password" placeholder="••••••••" class="w-full bg-slate-900 border border-emerald-500/40 p-3 rounded-2xl text-center text-base font-mono text-white tracking-wider focus:outline-none focus:border-emerald-400">
             <div class="flex gap-2">
                 <button onclick="closeAdminModal()" class="w-1/2 bg-slate-800 text-slate-300 py-2.5 rounded-xl text-xs font-bold">إلغاء</button>
-                <button onclick="verifyAdminLogin()" class="w-1/2 bg-purple-600 hover:bg-purple-500 text-white py-2.5 rounded-xl text-xs font-bold">دخول</button>
+                <button onclick="verifyAdminLogin()" class="w-1/2 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-xs font-bold">دخول</button>
             </div>
         </div>
     </div>
 
     <!-- SCRIPT ENGINE -->
     <script>
-        // --- 1. GOOGLE APPS SCRIPT CLOUD ENDPOINT ---
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby855wEYncAGqp9mv9uqYJG4JMluOlO8LmGMRh4V5_Fg4JjLXRznwzcFMX4T4LBHJITDw/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdYVqlD3zaTdIAkJSzlVUR2KrvCvSceFJrXl9qB3UqccOryI7LhyGi6NfaOXG3IC6d/exec";
+        const NEW_BANNER_URL = "https://i.postimg.cc/Y2FdWsdv/ghlaf.jpg";
 
-        // Web Audio Synthesizer
         let audioCtx = null;
-        function initAudio() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
         }
 
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown'].forEach(evt => {
+            window.addEventListener(evt, () => { getAudioContext(); }, { passive: true });
+        });
+
         function playSound(type) {
-            initAudio();
             try {
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
 
                 if (type === 'click') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(600, now);
-                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-                    osc.connect(gain); gain.connect(audioCtx.destination);
+                    osc.frequency.setValueAtTime(650, now);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+                    osc.connect(gain); gain.connect(ctx.destination);
                     osc.start(now); osc.stop(now + 0.05);
-                } else if (type === 'correct') {
+                } 
+                else if (type === 'correct') {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + (i * 0.06));
+                        gain.gain.setValueAtTime(0.45, now + (i * 0.06));
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + (i * 0.06) + 0.3);
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.start(now + (i * 0.06)); osc.stop(now + (i * 0.06) + 0.3);
+                    });
+                } 
+                else if (type === 'wrong') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.setValueAtTime(659.25, now + 0.08);
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-                    osc.connect(gain); gain.connect(audioCtx.destination);
-                    osc.start(now); osc.stop(now + 0.18);
-                } else if (type === 'wrong') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.linearRampToValueAtTime(140, now + 0.15);
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-                    osc.connect(gain); gain.connect(audioCtx.destination);
-                    osc.start(now); osc.stop(now + 0.15);
-                } else if (type === 'fanfare') {
-                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-                        const o = audioCtx.createOscillator();
-                        const g = audioCtx.createGain();
-                        o.type = 'triangle';
-                        o.frequency.value = freq;
-                        g.gain.setValueAtTime(0.12, now + idx * 0.08);
-                        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
-                        o.connect(g); g.connect(audioCtx.destination);
-                        o.start(now + idx * 0.08); o.stop(now + idx * 0.08 + 0.25);
+                    osc.frequency.setValueAtTime(200, now);
+                    gain.gain.setValueAtTime(0.4, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.start(now); osc.stop(now + 0.2);
+                } 
+                else if (type === 'fanfare') {
+                    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + (i * 0.08));
+                        gain.gain.setValueAtTime(0.45, now + (i * 0.08));
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + (i * 0.08) + 0.5);
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.start(now + (i * 0.08)); osc.stop(now + (i * 0.08) + 0.5);
                     });
                 }
             } catch(e) {}
         }
 
-        // Default Central Data
+        document.addEventListener('pointerdown', function(e) {
+            if (e.target.closest('button') || e.target.closest('select')) {
+                playSound('click');
+            }
+        }, { passive: true });
+
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
         const DEFAULT_CONFIG = {
             testId: 'exam_soc_04',
             title: 'اختبار الصف الرابع الابتدائي في الدراسات الاجتماعية',
@@ -557,51 +647,52 @@
             subject: 'الدراسات الاجتماعية',
             teacherName: 'مس رشا دياب',
             teacherPhone: '01205333472',
-            bannerUrl: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop',
+            bannerUrl: NEW_BANNER_URL,
             durationMinutes: 30,
             status: 'published',
-            adminPass: '330399'
+            adminPass: '330399',
+            isRandomOrder: true
         };
 
         const DEFAULT_STUDENTS = [
-            { id: 'std_01', name: 'أحمد محمد', passcode: '1234', isBanned: false, banReason: '', banTime: '' },
-            { id: 'std_02', name: 'محمد علي', passcode: '2233', isBanned: false, banReason: '', banTime: '' },
-            { id: 'std_03', name: 'سارة أحمد', passcode: '4455', isBanned: false, banReason: '', banTime: '' }
+            { id: 'std_401', name: 'أحمد محمد', passcode: '1122', isBanned: false, banReason: '', banTime: '' },
+            { id: 'std_402', name: 'سارة علي', passcode: '3344', isBanned: false, banReason: '', banTime: '' },
+            { id: 'std_403', name: 'محمود إبراهيم', passcode: '5566', isBanned: false, banReason: '', banTime: '' }
         ];
 
         const DEFAULT_QUESTIONS = [
             {
-                id: 'q_01',
+                id: 'q_401',
                 type: 'mcq',
-                text: 'تعد قارة أفريقيا إحدى قارات العالم القديم وتتميز بموقع جغرافي استراتيجي يربط بين مختلف قارات الأرض القديمة...',
-                options: ['القديم', 'الجديد', 'القطبي', 'المتجمد'],
+                text: 'تلون مسطحات المياه مثل البحار والمحيطات على الخريطة باللون...',
+                options: ['الأزرق', 'الأخضر', 'الأصفر', 'البني'],
                 correct: 0,
                 points: 1,
                 image: ''
             },
             {
-                id: 'q_02',
+                id: 'q_402',
                 type: 'true_false',
-                text: 'يربط ممر قناة السويس المائي التاريخي بين البحر المتوسط شمالاً والبحر الأحمر جنوباً مما وفر الكثير من المسافات التجارية.',
+                text: 'تتخذ مصر كعاصمة لها مدينة القاهرة.',
                 options: ['عبارة صحيحة', 'عبارة خاطئة'],
                 correct: 0,
                 points: 1,
                 image: ''
             },
             {
-                id: 'q_03',
+                id: 'q_403',
                 type: 'complete',
-                text: 'عاصمة جمهورية مصر العربية وأكبر مدنها من حيث المساحة والتاريخ العريق هي مدينة...',
-                options: ['الإسكندرية', 'القاهرة', 'الجيزة', 'بورسعيد'],
-                correct: 1,
+                text: 'يتوسط علم مصر صقر من عهد القائد...',
+                options: ['صلاح الدين الأيوبي', 'المعز لدين الله', 'سلطان الباشا', 'محمد علي'],
+                correct: 0,
                 points: 2,
                 image: ''
             },
             {
-                id: 'q_04',
+                id: 'q_404',
                 type: 'error_correction',
-                text: 'صوب الخطأ الموجود في العبارة التالية: اللون الأزرق في علم مصر يرمز للسلام والوفاق الوطني. التصويب هو اللون...',
-                options: ['الأبيض', 'الأسود', 'الأحمر', 'الأخضر'],
+                text: 'صوب الخطأ: تقع مصر في قارة أستراليا. التصويب هو أنها تقع في قارة...',
+                options: ['أفريقيا', 'آسيا', 'أوروبا', 'أمريكا الشمالية'],
                 correct: 0,
                 points: 2,
                 image: ''
@@ -615,7 +706,11 @@
             results: []
         };
 
-        // Cloud Data Synchronization with Google Sheets
+        let currentStudent = null;
+        let activeAttempt = null;
+        let timerInterval = null;
+        let isPreviewMode = false;
+
         async function fetchCloudData() {
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL);
@@ -623,30 +718,37 @@
                     const text = await response.text();
                     if (text && text.trim().length > 10) {
                         const data = JSON.parse(text);
-                        if (data && (data.questions || data.config)) {
-                            DB.config = data.config || DEFAULT_CONFIG;
+                        if (data && data.questions && data.questions.length > 0) {
+                            DB.config = { ...DEFAULT_CONFIG, ...data.config };
+                            DB.config.bannerUrl = NEW_BANNER_URL;
                             DB.students = data.students || DEFAULT_STUDENTS;
-                            DB.questions = data.questions || DEFAULT_QUESTIONS;
+                            DB.questions = data.questions;
                             DB.results = data.results || [];
-                        } else {
-                            await persistDB();
+                            initApp();
+                            checkActiveResumeSession();
+                            return;
                         }
-                    } else {
-                        await persistDB();
                     }
                 }
-            } catch(e) {
-                console.warn("Using local fallback:", e);
-                const local = localStorage.getItem('quiz_safe_cloud_db');
-                if (local) DB = JSON.parse(local);
-            } finally {
-                document.getElementById('cloud-loader').classList.add('hidden');
-                initApp();
+            } catch(e) {}
+
+            const saved = localStorage.getItem('grade4_full_master_db');
+            if (saved) {
+                try { 
+                    const parsed = JSON.parse(saved);
+                    if (parsed && parsed.questions && parsed.questions.length > 0) {
+                        DB = parsed;
+                        DB.config.bannerUrl = NEW_BANNER_URL;
+                    }
+                } catch(err) {}
             }
+            initApp();
+            checkActiveResumeSession();
         }
 
-        async function persistDB() {
-            localStorage.setItem('quiz_safe_cloud_db', JSON.stringify(DB));
+        async function saveDatabase() {
+            DB.config.bannerUrl = NEW_BANNER_URL;
+            localStorage.setItem('grade4_full_master_db', JSON.stringify(DB));
             try {
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
@@ -654,15 +756,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(DB)
                 });
-            } catch(e) {
-                console.error("Google Sheets persist error:", e);
-            }
+            } catch(e) {}
         }
-
-        let currentStudent = null;
-        let activeAttempt = null;
-        let timerInterval = null;
-        let isPreviewMode = false;
 
         function showToast(msg, icon = 'fa-circle-info', isError = false) {
             const toast = document.getElementById('toast');
@@ -670,7 +765,7 @@
             const toastIcon = document.getElementById('toast-icon');
 
             toastMsg.innerText = msg;
-            toastIcon.className = `fa-solid ${icon} ${isError ? 'text-red-400' : 'text-sky-400'}`;
+            toastIcon.className = `fa-solid ${icon} ${isError ? 'text-red-400' : 'text-emerald-400'}`;
             toast.classList.remove('opacity-0', '-translate-y-20', 'pointer-events-none');
 
             setTimeout(() => {
@@ -690,7 +785,9 @@
             document.getElementById('display-quiz-title').innerText = DB.config.title;
             document.getElementById('display-teacher-name').innerText = DB.config.teacherName;
             document.getElementById('display-teacher-phone').innerText = DB.config.teacherPhone;
-            document.getElementById('display-quiz-banner').src = DB.config.bannerUrl;
+            
+            const banner = document.getElementById('display-quiz-banner');
+            banner.src = NEW_BANNER_URL;
 
             const badge = document.getElementById('display-badge-status');
             if (DB.config.status === 'published') {
@@ -714,13 +811,45 @@
             });
         }
 
-        function getTodayDateString() {
-            const d = new Date();
-            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        function checkActiveResumeSession() {
+            const savedAttempt = localStorage.getItem('grade4_active_attempt');
+            if (savedAttempt) {
+                try {
+                    const parsed = JSON.parse(savedAttempt);
+                    if (parsed && !parsed.isCompleted && parsed.timeRemaining > 0 && parsed.questions && parsed.questions.length > 0) {
+                        activeAttempt = parsed;
+                        currentStudent = DB.students.find(s => s.id === activeAttempt.studentId) || { id: activeAttempt.studentId, name: activeAttempt.studentName };
+                        
+                        document.getElementById('quiz-header-teacher').innerText = DB.config.teacherName;
+                        document.getElementById('quiz-header-student').innerText = currentStudent.name;
+
+                        navigateTo('screen-quiz');
+                        renderCurrentQuestion();
+                        startQuizTimer();
+                        showToast('تم استئناف اختبارك بنجاح.', 'fa-clock-rotate-left');
+                    }
+                } catch(e) {}
+            }
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            if (activeAttempt && !activeAttempt.isCompleted && !isPreviewMode) {
+                e.preventDefault();
+                e.returnValue = 'أنت في منتصف الاختبار، الرجاء عدم مغادرة الصفحة!';
+            }
+        });
+
+        function saveActiveAttemptState() {
+            if (!isPreviewMode && activeAttempt && !activeAttempt.isCompleted) {
+                localStorage.setItem('grade4_active_attempt', JSON.stringify(activeAttempt));
+            }
+        }
+
+        function clearActiveAttemptState() {
+            localStorage.removeItem('grade4_active_attempt');
         }
 
         function handleStartClick() {
-            playSound('click');
             const studentId = document.getElementById('select-student').value;
             if (!studentId) {
                 showToast('يرجى اختيار اسم الطالب أولاً.', 'fa-circle-exclamation', true);
@@ -731,21 +860,12 @@
             if (!student) return;
 
             if (student.isBanned) {
-                showToast(`أنت محظور من أداء الاختبار. السبب: ${student.banReason || 'مخالفة التعليمات'}`, 'fa-ban', true);
+                openBlockedModal(student);
                 return;
             }
 
             if (DB.config.status !== 'published') {
                 showToast('الاختبار غير متاح حالياً للطلاب.', 'fa-lock', true);
-                return;
-            }
-
-            const today = getTodayDateString();
-            const existingResult = DB.results.find(r => r.studentId === student.id && r.dateString === today);
-            if (existingResult) {
-                if (confirm('لقد أديت هذا الاختبار اليوم بالفعل. لا يسمح بأداء الاختبار أكثر من مرة واحدة خلال اليوم.\n\nهل ترغب في عرض نتيجتك السابقة؟')) {
-                    displayResultScreen(existingResult);
-                }
                 return;
             }
 
@@ -755,15 +875,36 @@
             document.getElementById('modal-passcode').classList.remove('hidden');
         }
 
+        function openBlockedModal(student) {
+            const lastRes = DB.results.slice().reverse().find(r => r.studentId === student.id);
+            document.getElementById('blocked-student-name').innerText = student.name;
+            
+            if (lastRes) {
+                document.getElementById('blocked-modal-title').innerText = 'تم أداء الاختبار بنجاح مسبقاً';
+                document.getElementById('blocked-modal-msg').innerText = 'لقد قمت بإتمام هذا الاختبار، وهذه بيانات نتيجتك السابقة:';
+                document.getElementById('blocked-student-score').innerText = `${lastRes.score} من ${lastRes.totalPoints}`;
+                document.getElementById('blocked-student-percent').innerText = `${lastRes.percent}%`;
+                document.getElementById('blocked-student-time').innerText = lastRes.dateTime;
+                document.getElementById('blocked-modal-scorebox').classList.remove('hidden');
+            } else {
+                document.getElementById('blocked-modal-title').innerText = 'حساب الطالب مقيد مؤقتاً';
+                document.getElementById('blocked-modal-msg').innerText = `السبب المسجل: ${student.banReason || 'مخالفة تعليمات الاختبار'}`;
+                document.getElementById('blocked-modal-scorebox').classList.add('hidden');
+            }
+            document.getElementById('modal-student-blocked').classList.remove('hidden');
+        }
+
+        function closeBlockedModal() {
+            document.getElementById('modal-student-blocked').classList.add('hidden');
+        }
+
         function closePasscodeModal() {
-            playSound('click');
             document.getElementById('modal-passcode').classList.add('hidden');
         }
 
         function verifyStudentPasscode() {
             const entered = document.getElementById('student-passcode-input').value.trim();
             if (entered === currentStudent.passcode) {
-                playSound('correct');
                 closePasscodeModal();
                 document.getElementById('ready-q-count').innerText = `${DB.questions.length} أسئلة`;
                 document.getElementById('ready-duration').innerText = `${DB.config.durationMinutes} دقيقة`;
@@ -775,48 +916,51 @@
         }
 
         function closeReadyModal() {
-            playSound('click');
             document.getElementById('modal-ready').classList.add('hidden');
         }
 
         function startActualQuiz() {
-            playSound('click');
             closeReadyModal();
             isPreviewMode = false;
 
-            const randomizedQuestions = DB.questions.map(q => {
-                let optionsWithIndices = q.options.map((opt, i) => ({ text: opt, originalIndex: i }));
-                for (let i = optionsWithIndices.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [optionsWithIndices[i], optionsWithIndices[j]] = [optionsWithIndices[j], optionsWithIndices[i]];
+            const isRandom = DB.config.isRandomOrder !== false;
+
+            let preparedQuestions = DB.questions.map(q => {
+                const correctText = q.options[q.correct];
+                let optionsList = [...q.options];
+                
+                if (isRandom && q.type !== 'true_false') {
+                    optionsList = shuffleArray(optionsList);
                 }
+
                 return {
                     questionId: q.id,
                     text: q.text,
                     type: q.type,
                     points: q.points,
                     image: q.image,
-                    correctOriginalIndex: q.correct,
-                    shuffledOptions: optionsWithIndices
+                    correctText: correctText,
+                    shuffledOptions: optionsList
                 };
             });
 
-            for (let i = randomizedQuestions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [randomizedQuestions[i], randomizedQuestions[j]] = [randomizedQuestions[j], randomizedQuestions[i]];
+            if (isRandom) {
+                preparedQuestions = shuffleArray(preparedQuestions);
             }
 
             activeAttempt = {
-                attemptId: 'att_' + Date.now(),
+                attemptId: 'att_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
                 studentId: currentStudent.id,
                 studentName: currentStudent.name,
-                questions: randomizedQuestions,
+                questions: preparedQuestions,
                 currentIndex: 0,
                 answers: {},
                 startTime: Date.now(),
                 timeRemaining: DB.config.durationMinutes * 60,
                 isCompleted: false
             };
+
+            saveActiveAttemptState();
 
             document.getElementById('quiz-header-teacher').innerText = DB.config.teacherName;
             document.getElementById('quiz-header-student').innerText = currentStudent.name;
@@ -827,7 +971,6 @@
         }
 
         function previewQuiz() {
-            playSound('click');
             isPreviewMode = true;
             currentStudent = { id: 'preview_id', name: 'معاينة تجريبية (المدير)' };
             
@@ -837,8 +980,8 @@
                 type: q.type,
                 points: q.points,
                 image: q.image,
-                correctOriginalIndex: q.correct,
-                shuffledOptions: q.options.map((opt, i) => ({ text: opt, originalIndex: i }))
+                correctText: q.options[q.correct],
+                shuffledOptions: [...q.options]
             }));
 
             activeAttempt = {
@@ -862,6 +1005,10 @@
         }
 
         function renderCurrentQuestion() {
+            if (!activeAttempt || !activeAttempt.questions || activeAttempt.currentIndex >= activeAttempt.questions.length) {
+                return;
+            }
+
             const q = activeAttempt.questions[activeAttempt.currentIndex];
             document.getElementById('quiz-question-counter').innerText = `السؤال ${activeAttempt.currentIndex + 1} من ${activeAttempt.questions.length}`;
             document.getElementById('quiz-q-points').innerText = q.points;
@@ -870,8 +1017,10 @@
             const typeLabels = {
                 mcq: 'اختيار من متعدد',
                 true_false: 'صح أو خطأ',
-                complete: 'أكمل باختيار من أربعة',
-                error_correction: 'تصويب الخطأ'
+                complete: 'أكمل العبارة',
+                error_correction: 'تصويب الخطأ',
+                what_results: 'ما النتائج المترتبة على',
+                why_explain: 'بما تفسر'
             };
             document.getElementById('quiz-q-type').innerText = typeLabels[q.type] || 'سؤال';
 
@@ -887,26 +1036,34 @@
             const container = document.getElementById('quiz-options-container');
             container.innerHTML = '';
 
-            q.shuffledOptions.forEach(optObj => {
+            q.shuffledOptions.forEach(optText => {
                 const btn = document.createElement('button');
-                btn.className = 'glass-card hover:bg-sky-500/20 border border-slate-600/80 hover:border-sky-400 p-4 rounded-2xl text-white font-bold text-sm sm:text-base transition text-center btn-3d flex items-center justify-center min-h-[55px] wrap-safe leading-relaxed';
-                btn.innerText = optObj.text;
-                btn.onclick = () => selectOption(optObj.originalIndex);
+                btn.type = 'button';
+                btn.className = 'glass-card hover:bg-emerald-600/30 border border-emerald-500/40 hover:border-emerald-300 p-4 rounded-2xl text-white font-bold text-sm sm:text-base transition text-center btn-3d flex items-center justify-center min-h-[55px] wrap-safe leading-relaxed cursor-pointer';
+                btn.innerText = optText;
+                
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    selectOption(optText);
+                };
+                
                 container.appendChild(btn);
             });
         }
 
-        function selectOption(originalIndex) {
+        function selectOption(selectedText) {
             const currentQ = activeAttempt.questions[activeAttempt.currentIndex];
-            activeAttempt.answers[currentQ.questionId] = originalIndex;
+            activeAttempt.answers[currentQ.questionId] = selectedText;
 
-            if (originalIndex === currentQ.correctOriginalIndex) {
+            if (selectedText.trim() === currentQ.correctText.trim()) {
                 playSound('correct');
             } else {
                 playSound('wrong');
             }
 
             activeAttempt.currentIndex++;
+            saveActiveAttemptState();
+
             if (activeAttempt.currentIndex < activeAttempt.questions.length) {
                 setTimeout(renderCurrentQuestion, 250);
             } else {
@@ -916,22 +1073,18 @@
 
         function startQuizTimer() {
             clearInterval(timerInterval);
-            updateTimerDisplay();
             timerInterval = setInterval(() => {
                 activeAttempt.timeRemaining--;
-                updateTimerDisplay();
+                saveActiveAttemptState();
+
+                const m = Math.floor(activeAttempt.timeRemaining / 60);
+                const s = activeAttempt.timeRemaining % 60;
+                document.getElementById('quiz-timer').innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
                 if (activeAttempt.timeRemaining <= 0) {
                     clearInterval(timerInterval);
                     finishQuiz(true);
                 }
             }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const m = Math.floor(activeAttempt.timeRemaining / 60);
-            const s = activeAttempt.timeRemaining % 60;
-            document.getElementById('quiz-timer').innerText = 
-                `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
         function confirmExitQuiz() {
@@ -943,6 +1096,7 @@
         async function finishQuiz(isTimeOut = false) {
             clearInterval(timerInterval);
             activeAttempt.isCompleted = true;
+            clearActiveAttemptState();
 
             let totalPoints = 0;
             let earnedScore = 0;
@@ -953,15 +1107,11 @@
 
             activeAttempt.questions.forEach(q => {
                 totalPoints += q.points;
-                const studentAns = activeAttempt.answers[q.questionId];
-                const origQuestion = DB.questions.find(orig => orig.id === q.questionId) || q;
-                const correctText = origQuestion.options[q.correctOriginalIndex];
-                let studentText = 'لم تتم الإجابة';
+                const studentAnsText = activeAttempt.answers[q.questionId];
                 let isCorrect = false;
 
-                if (studentAns !== undefined) {
-                    studentText = origQuestion.options[studentAns];
-                    if (studentAns === q.correctOriginalIndex) {
+                if (studentAnsText !== undefined) {
+                    if (studentAnsText.trim() === q.correctText.trim()) {
                         earnedScore += q.points;
                         correctCount++;
                         isCorrect = true;
@@ -974,11 +1124,11 @@
 
                 details.push({
                     questionText: q.text,
-                    studentAnsText: studentText,
-                    correctAnsText: correctText,
+                    studentAnsText: studentAnsText !== undefined ? studentAnsText : 'لم تتم الإجابة',
+                    correctAnsText: q.correctText,
                     pointsEarned: isCorrect ? q.points : 0,
                     pointsPossible: q.points,
-                    status: studentAns === undefined ? 'unanswered' : (isCorrect ? 'correct' : 'wrong')
+                    status: studentAnsText === undefined ? 'unanswered' : (isCorrect ? 'correct' : 'wrong')
                 });
             });
 
@@ -989,7 +1139,6 @@
                 studentId: currentStudent.id,
                 studentName: currentStudent.name,
                 examTitle: DB.config.title,
-                dateString: getTodayDateString(),
                 dateTime: new Date().toLocaleString('ar-EG'),
                 score: earnedScore,
                 totalPoints: totalPoints,
@@ -1003,10 +1152,23 @@
 
             if (!isPreviewMode) {
                 DB.results.push(resultObj);
-                await persistDB();
+                
+                const targetStudent = DB.students.find(s => s.id === currentStudent.id);
+                if (targetStudent) {
+                    targetStudent.isBanned = true;
+                    targetStudent.banReason = 'تم أداء الاختبار بنجاح (مغلق تلقائياً)';
+                    targetStudent.banTime = new Date().toLocaleString('ar-EG');
+                }
+
+                await saveDatabase();
             }
 
-            playSound('fanfare');
+            if (percent >= 75) {
+                playSound('fanfare');
+            } else {
+                playSound('click');
+            }
+
             displayResultScreen(resultObj);
         }
 
@@ -1024,12 +1186,12 @@
 
             if (result.percent >= 85) {
                 headline.innerText = 'أداء باهر وممتاز يا بطل! 🌟';
-                msg.innerText = 'ما شاء الله عليك، إجاباتك تدل على فهم واستيعاب رائع للمنهج!';
+                msg.innerText = 'ما شاء الله عليك، إجاباتك تدل على فهم واستيعاب رائع لمنهج الصف الرابع!';
                 iconWrap.className = 'w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
             } else if (result.percent >= 65) {
                 headline.innerText = 'نتيجة جيدة جداً، واصل التقدم! 👏';
                 msg.innerText = 'مستوى طيب ومجهود تشكر عليه، بقليل من المراجعة ستصل للدرجة النهائية.';
-                iconWrap.className = 'w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-xl bg-sky-500/20 text-sky-400 border border-sky-500/40';
+                iconWrap.className = 'w-20 h-20 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-xl bg-teal-500/20 text-teal-300 border border-teal-500/40';
             } else {
                 headline.innerText = 'محاولة طيبة، راجع دروسك وستتفوق! 💪';
                 msg.innerText = 'لا بأس، كل تجربة تعلمنا الكثير. راجع النقاط الخاطئة واستعد للاختبار القادم.';
@@ -1053,7 +1215,7 @@
                         <span class="text-white">س${idx + 1}: ${item.questionText}</span>
                         <span class="${isCorr ? 'text-emerald-400' : 'text-red-400'}">${item.pointsEarned} / ${item.pointsPossible} درجات</span>
                     </div>
-                    <div class="text-slate-300">إجابتك: <span class="font-bold ${isCorr ? 'text-emerald-300' : 'text-red-300'}">${item.studentAnsText}</span></div>
+                    <div class="text-emerald-200">إجابتك: <span class="font-bold ${isCorr ? 'text-emerald-300' : 'text-red-300'}">${item.studentAnsText}</span></div>
                     ${!isCorr ? `<div class="text-emerald-400 mt-0.5 font-bold">الإجابة الصحيحة: ${item.correctAnsText}</div>` : ''}
                 `;
                 breakdown.appendChild(div);
@@ -1062,22 +1224,20 @@
             navigateTo('screen-result');
         }
 
-        // --- ADMIN PANEL FUNCTIONS ---
+        // --- ADMIN PANEL LOGIC ---
         function openAdminModal() {
-            playSound('click');
-            document.getElementById('admin-passcode-input').value = '';
+            const inp = document.getElementById('admin-passcode-input');
+            inp.value = '';
             document.getElementById('modal-admin-auth').classList.remove('hidden');
         }
 
         function closeAdminModal() {
-            playSound('click');
             document.getElementById('modal-admin-auth').classList.add('hidden');
         }
 
         function verifyAdminLogin() {
             const pass = document.getElementById('admin-passcode-input').value.trim();
             if (pass === DB.config.adminPass) {
-                playSound('correct');
                 closeAdminModal();
                 loadAdminData();
                 navigateTo('screen-admin');
@@ -1088,20 +1248,62 @@
         }
 
         function logoutAdmin() {
-            playSound('click');
             initApp();
             navigateTo('screen-home');
         }
 
         function switchAdminTab(tabName) {
-            playSound('click');
             ['settings', 'questions', 'students', 'banned', 'results'].forEach(t => {
                 document.getElementById(`admin-tab-${t}`).classList.add('hidden');
-                const btn = document.getElementById(`admin-tab-btn-${t}`);
-                btn.className = 'admin-tab-btn px-4 py-2 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap';
+                document.getElementById(`admin-tab-btn-${t}`).className = 'admin-tab-btn px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 whitespace-nowrap';
             });
             document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
-            document.getElementById(`admin-tab-btn-${tabName}`).className = 'admin-tab-btn px-4 py-2 rounded-xl bg-sky-500 text-white whitespace-nowrap';
+            document.getElementById(`admin-tab-btn-${tabName}`).className = 'admin-tab-btn px-4 py-2.5 rounded-xl bg-emerald-600 text-white whitespace-nowrap';
+        }
+
+        function updateRandomButtonUI() {
+            const btn = document.getElementById('btn-toggle-random');
+            const icon = document.getElementById('icon-toggle-random');
+            const text = document.getElementById('text-toggle-random');
+            const isRandom = DB.config.isRandomOrder !== false;
+
+            if (isRandom) {
+                btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md';
+                icon.className = 'fa-solid fa-check';
+                text.innerText = 'مفعل (ترتيب عشوائي للأسئلة والخيارات)';
+            } else {
+                btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 border border-slate-600 shadow-md';
+                icon.className = 'fa-solid fa-bars-staggered';
+                text.innerText = 'معطل (ترتيب تسلسلي ثابت)';
+            }
+        }
+
+        async function toggleRandomMode() {
+            DB.config.isRandomOrder = (DB.config.isRandomOrder === false) ? true : false;
+            updateRandomButtonUI();
+            await saveDatabase();
+            if (DB.config.isRandomOrder) {
+                showToast('تم تفعيل الترتيب العشوائي للأسئلة والخيارات بنجاح.', 'fa-shuffle');
+            } else {
+                showToast('تم ضبط الاختبار على الترتيب التسلسلي الثابت.', 'fa-bars-staggered');
+            }
+        }
+
+        function previewBannerInput(url) {
+            const prev = document.getElementById('admin-banner-preview');
+            const fallback = document.getElementById('admin-banner-fallback');
+            if (url && url.trim().length > 5) {
+                prev.src = url.trim();
+                prev.classList.remove('hidden');
+                fallback.classList.add('hidden');
+                prev.onerror = () => {
+                    prev.classList.add('hidden');
+                    fallback.classList.remove('hidden');
+                };
+            } else {
+                prev.classList.add('hidden');
+                fallback.classList.remove('hidden');
+            }
         }
 
         function loadAdminData() {
@@ -1111,9 +1313,12 @@
             document.getElementById('admin-input-teacher').value = DB.config.teacherName;
             document.getElementById('admin-input-phone').value = DB.config.teacherPhone;
             document.getElementById('admin-input-duration').value = DB.config.durationMinutes;
-            document.getElementById('admin-input-banner').value = DB.config.bannerUrl;
+            document.getElementById('admin-input-banner').value = NEW_BANNER_URL;
             document.getElementById('admin-input-status').value = DB.config.status;
             document.getElementById('admin-input-newpass').value = '';
+
+            previewBannerInput(NEW_BANNER_URL);
+            updateRandomButtonUI();
 
             renderAdminQuestions();
             renderAdminStudents();
@@ -1122,34 +1327,32 @@
         }
 
         async function saveAdminSettings() {
-            playSound('click');
             DB.config.title = document.getElementById('admin-input-title').value.trim() || DB.config.title;
             DB.config.grade = document.getElementById('admin-input-grade').value.trim();
             DB.config.subject = document.getElementById('admin-input-subject').value.trim();
             DB.config.teacherName = document.getElementById('admin-input-teacher').value.trim();
             DB.config.teacherPhone = document.getElementById('admin-input-phone').value.trim();
             DB.config.durationMinutes = parseInt(document.getElementById('admin-input-duration').value) || 30;
-            DB.config.bannerUrl = document.getElementById('admin-input-banner').value.trim();
+            DB.config.bannerUrl = NEW_BANNER_URL;
             DB.config.status = document.getElementById('admin-input-status').value;
 
             const newPass = document.getElementById('admin-input-newpass').value.trim();
             if (newPass) DB.config.adminPass = newPass;
 
-            await persistDB();
-            showToast('تم الحفظ والتحديث في Google Sheets بنجاح.', 'fa-cloud-arrow-up');
+            await saveDatabase();
+            showToast('تم حفظ وتحديث الإعدادات بنجاح.', 'fa-cloud-arrow-up');
         }
 
         function handleQTypeChange() {
             const type = document.getElementById('admin-q-type').value;
-            const optWrap = document.getElementById('admin-q-options-wrap');
-            const selectCorrect = document.getElementById('admin-q-correct');
-
+            const wrap = document.getElementById('admin-q-options-wrap');
+            const sel = document.getElementById('admin-q-correct');
             if (type === 'true_false') {
-                optWrap.classList.add('hidden');
-                selectCorrect.innerHTML = '<option value="0">عبارة صحيحة</option><option value="1">عبارة خاطئة</option>';
+                wrap.classList.add('hidden');
+                sel.innerHTML = '<option value="0">عبارة صحيحة</option><option value="1">عبارة خاطئة</option>';
             } else {
-                optWrap.classList.remove('hidden');
-                selectCorrect.innerHTML = '<option value="0">الخيار 1</option><option value="1">الخيار 2</option><option value="2">الخيار 3</option><option value="3">الخيار 4</option>';
+                wrap.classList.remove('hidden');
+                sel.innerHTML = '<option value="0">الخيار 1</option><option value="1">الخيار 2</option><option value="2">الخيار 3</option><option value="3">الخيار 4</option>';
             }
         }
 
@@ -1157,26 +1360,24 @@
             const list = document.getElementById('admin-questions-list');
             document.getElementById('admin-q-count').innerText = DB.questions.length;
             list.innerHTML = '';
-
             DB.questions.forEach((q, idx) => {
-                const item = document.createElement('div');
-                item.className = 'p-3 bg-slate-800/80 rounded-xl border border-slate-700 flex justify-between items-center text-xs';
-                item.innerHTML = `
+                const div = document.createElement('div');
+                div.className = 'p-3 bg-slate-800/80 rounded-xl border border-emerald-500/30 flex justify-between items-center text-xs';
+                div.innerHTML = `
                     <div class="overflow-hidden pr-2">
-                        <span class="font-bold text-white wrap-safe block">س${idx + 1}: ${q.text}</span>
-                        <span class="text-sky-400 font-semibold">(${q.points} درجات)</span>
+                        <span class="font-bold text-white block">س${idx + 1}: ${q.text}</span>
+                        <span class="text-emerald-300 font-semibold">(${q.points} درجات)</span>
                     </div>
                     <div class="flex gap-2 flex-shrink-0">
-                        <button onclick="editQuestion('${q.id}')" class="text-sky-400 hover:text-sky-300 p-1"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="editQuestion('${q.id}')" class="text-emerald-300 hover:text-emerald-200 p-1"><i class="fa-solid fa-pen"></i></button>
                         <button onclick="deleteQuestion('${q.id}')" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 `;
-                list.appendChild(item);
+                list.appendChild(div);
             });
         }
 
         async function saveQuestion() {
-            playSound('click');
             const qId = document.getElementById('admin-q-id').value;
             const type = document.getElementById('admin-q-type').value;
             const text = document.getElementById('admin-q-text').value.trim();
@@ -1197,7 +1398,6 @@
                 const opt1 = document.getElementById('admin-q-opt-1').value.trim();
                 const opt2 = document.getElementById('admin-q-opt-2').value.trim();
                 const opt3 = document.getElementById('admin-q-opt-3').value.trim();
-
                 if (!opt0 || !opt1 || !opt2 || !opt3) {
                     showToast('يرجى تعبئة الخيارات الأربعة كاملة.', 'fa-circle-exclamation', true);
                     return;
@@ -1218,10 +1418,10 @@
                 });
             }
 
-            await persistDB();
+            await saveDatabase();
             resetQuestionForm();
             renderAdminQuestions();
-            showToast('تم حفظ السؤال وتحديثه سحابياً.', 'fa-cloud-arrow-up');
+            showToast('تم حفظ وتحديث السؤال سحابياً.', 'fa-cloud-arrow-up');
         }
 
         function editQuestion(id) {
@@ -1245,11 +1445,11 @@
         }
 
         async function deleteQuestion(id) {
-            if (confirm('هل أنت متأكد من حذف هذا السؤال نهائياً؟')) {
+            if (confirm('هل أنت متأكد من حذف هذا السؤال؟')) {
                 DB.questions = DB.questions.filter(q => q.id !== id);
-                await persistDB();
+                await saveDatabase();
                 renderAdminQuestions();
-                showToast('تم حذف السؤال سحابياً.', 'fa-trash');
+                showToast('تم حذف السؤال.', 'fa-trash');
             }
         }
 
@@ -1267,17 +1467,16 @@
         function renderAdminStudents() {
             const tbody = document.getElementById('admin-students-tbody');
             tbody.innerHTML = '';
-
             DB.students.forEach(s => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="p-2.5 font-mono">${s.id}</td>
                     <td class="p-2.5 font-bold text-white">${s.name}</td>
-                    <td class="p-2.5 font-mono text-sky-400">${s.passcode}</td>
-                    <td class="p-2.5">${s.isBanned ? '<span class="text-red-400 font-bold">محظور</span>' : '<span class="text-emerald-400">نشط</span>'}</td>
+                    <td class="p-2.5 font-mono text-emerald-300">${s.passcode}</td>
+                    <td class="p-2.5">${s.isBanned ? '<span class="text-amber-400 font-bold">مقيد / أتم الاختبار</span>' : '<span class="text-emerald-400">متاح للاختبار</span>'}</td>
                     <td class="p-2.5 flex gap-2">
-                        <button onclick="toggleBanStudent('${s.id}')" class="text-xs ${s.isBanned ? 'text-emerald-400' : 'text-amber-400'}">${s.isBanned ? 'فك الحظر' : 'حظر'}</button>
-                        <button onclick="deleteStudent('${s.id}')" class="text-xs text-red-400">حذف</button>
+                        <button onclick="toggleBanStudent('${s.id}')" class="text-xs ${s.isBanned ? 'text-emerald-400 font-bold' : 'text-amber-400'}">${s.isBanned ? 'فك القيد' : 'حظر'}</button>
+                        <button onclick="deleteStudent('${s.id}')" class="text-xs text-red-400 hover:underline">حذف</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1285,7 +1484,6 @@
         }
 
         async function addStudent() {
-            playSound('click');
             const name = document.getElementById('admin-new-student-name').value.trim();
             const pass = document.getElementById('admin-new-student-pass').value.trim();
             if (!name || !pass) {
@@ -1300,11 +1498,11 @@
                 banReason: '',
                 banTime: ''
             });
-            await persistDB();
+            await saveDatabase();
             document.getElementById('admin-new-student-name').value = '';
             document.getElementById('admin-new-student-pass').value = '';
             renderAdminStudents();
-            showToast('تمت إضافة الطالب بنجاح سحابياً.', 'fa-user-check');
+            showToast('تمت إضافة الطالب بنجاح.', 'fa-user-check');
         }
 
         async function toggleBanStudent(id) {
@@ -1321,8 +1519,9 @@
                 s.isBanned = false;
                 s.banReason = '';
                 s.banTime = '';
+                showToast(`تم فك الحظر عن الطالب ${s.name} بنجاح، يمكنه الآن دخول الاختبار مرة أخرى.`, 'fa-circle-check');
             }
-            await persistDB();
+            await saveDatabase();
             renderAdminStudents();
             renderAdminBanned();
         }
@@ -1330,10 +1529,10 @@
         async function deleteStudent(id) {
             if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
                 DB.students = DB.students.filter(s => s.id !== id);
-                await persistDB();
+                await saveDatabase();
                 renderAdminStudents();
                 renderAdminBanned();
-                showToast('تم حذف الطالب سحابياً.', 'fa-trash');
+                showToast('تم حذف الطالب.', 'fa-trash');
             }
         }
 
@@ -1343,7 +1542,7 @@
             const banned = DB.students.filter(s => s.isBanned);
 
             if (banned.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-500">لا يوجد طلاب محظورون حالياً.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-500">لا يوجد طلاب محظورون أو مقيدون حالياً.</td></tr>';
                 return;
             }
 
@@ -1351,9 +1550,9 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="p-2.5 font-bold text-white">${s.name}</td>
-                    <td class="p-2.5 text-red-300">${s.banReason || 'بدون سبب'}</td>
-                    <td class="p-2.5 text-slate-400 font-mono">${s.banTime}</td>
-                    <td class="p-2.5"><button onclick="toggleBanStudent('${s.id}')" class="bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-2 py-1 rounded-lg text-[11px]">فك الحظر</button></td>
+                    <td class="p-2.5 text-amber-300">${s.banReason || 'أتم الاختبار'}</td>
+                    <td class="p-2.5 text-slate-400 font-mono text-[11px]">${s.banTime}</td>
+                    <td class="p-2.5"><button onclick="toggleBanStudent('${s.id}')" class="bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-lg text-xs font-bold hover:bg-emerald-600/50">فك الحظر وإتاحة الاختبار</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1368,18 +1567,41 @@
                 return;
             }
 
-            DB.results.slice().reverse().forEach(r => {
+            DB.results.slice().reverse().forEach((r, index) => {
+                const actualIndex = DB.results.length - 1 - index;
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="p-2.5 font-bold text-white">${r.studentName}</td>
-                    <td class="p-2.5 font-mono text-sky-400">${r.score} / ${r.totalPoints}</td>
+                    <td class="p-2.5 font-mono text-emerald-300">${r.score} / ${r.totalPoints}</td>
                     <td class="p-2.5 font-bold ${r.percent >= 50 ? 'text-emerald-400' : 'text-red-400'}">${r.percent}%</td>
                     <td class="p-2.5 text-slate-400">${r.correctCount} صح / ${r.wrongCount} خطأ</td>
                     <td class="p-2.5 text-slate-400 font-mono text-[11px]">${r.dateTime}</td>
-                    <td class="p-2.5"><button onclick='displayResultScreen(${JSON.stringify(r)})' class="text-sky-400 hover:text-sky-300 underline text-xs">عرض الورقة</button></td>
+                    <td class="p-2.5 flex items-center gap-2">
+                        <button onclick='displayResultScreen(${JSON.stringify(r)})' class="text-emerald-300 hover:text-emerald-200 underline text-xs">عرض الورقة</button>
+                        <span class="text-slate-600">|</span>
+                        <button onclick="deleteSingleResult(${actualIndex})" class="text-red-400 hover:text-red-300 text-xs font-semibold px-2 py-1 rounded bg-red-500/10 border border-red-500/20 transition"><i class="fa-solid fa-trash ml-1"></i> حذف</button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        async function deleteSingleResult(index) {
+            if (confirm('هل أنت متأكد من حذف نتيجة هذا الطالب؟')) {
+                DB.results.splice(index, 1);
+                await saveDatabase();
+                renderAdminResults();
+                showToast('تم حذف النتيجة بنجاح.', 'fa-trash');
+            }
+        }
+
+        async function clearAllResults() {
+            if (confirm('تحذير: هل أنت متأكد من حذف جميع النتائج المسجلة بالكامل؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                DB.results = [];
+                await saveDatabase();
+                renderAdminResults();
+                showToast('تم تفريغ وحذف جميع النتائج بنجاح.', 'fa-trash-can');
+            }
         }
 
         function exportResultsCSV() {
@@ -1396,14 +1618,11 @@
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `نتائج_اختبار_${DB.config.title.replace(/\s+/g, '_')}_${getTodayDateString()}.csv`;
+            link.download = `نتائج_الصف_الرابع_${Date.now()}.csv`;
             link.click();
         }
 
-        // Initialize App on Window Load
-        window.onload = () => {
-            fetchCloudData();
-        };
+        window.onload = fetchCloudData;
     </script>
 </body>
 </html>
