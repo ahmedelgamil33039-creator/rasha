@@ -1634,8 +1634,79 @@
             link.download = `نتائج_الصف_الرابع_${Date.now()}.csv`;
             link.click();
         }
+// ==========================================
+// نظام الخلط الفعلي للأسئلة الباقية في كل حالات المغادرة (بدون حظر)
+// ==========================================
+let isHandlingAbsence = false;
 
-        window.onload = fetchCloudData;
-    </script>
+function handleStudentAbsence() {
+    if (activeAttempt && !activeAttempt.isCompleted && !isPreviewMode && !isHandlingAbsence) {
+        isHandlingAbsence = true;
+        
+        if (activeAttempt.questions && activeAttempt.questions.length > activeAttempt.currentIndex) {
+            // فصل الأسئلة التي تم حلها عن الأسئلة الباقية، وخلط الأسئلة الباقية فعلياً
+            let answeredPart = activeAttempt.questions.slice(0, activeAttempt.currentIndex);
+            let remainingPart = activeAttempt.questions.slice(activeAttempt.currentIndex);
+            activeAttempt.questions = [...answeredPart, ...shuffleArray(remainingPart)];
+            saveActiveAttemptState();
+            
+            // تحديث الشاشة فوراً لعرض السؤال الجديد بعد الخلط
+            renderCurrentQuestion();
+            
+            showToast('تنبيه: تم رصد مغادرتك، وتم خلط الأسئلة الباقية!', 'fa-shuffle', true);
+        }
+        
+        setTimeout(() => {
+            isHandlingAbsence = false;
+        }, 1000);
+    }
+}
+
+// 1. رصد مغادرة التبويب (فتح تبويب آخر)
+document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+        handleStudentAbsence();
+    }
+});
+
+// 2. رصد تصغير المتصفح، أو الانتقال لتطبيق آخر (واتساب، شات جي بي تي، تليجرام، إلخ)
+window.addEventListener("blur", function() {
+    handleStudentAbsence();
+});
+
+// 3. الاستئناف الفعلي عند تحديث الصفحة (Refresh) مع خلط الأسئلة الباقية
+const originalCheckActive = window.checkActiveResumeSession;
+window.checkActiveResumeSession = function() {
+    const savedAttempt = localStorage.getItem('grade5_active_attempt');
+    if (savedAttempt) {
+        try {
+            const parsed = JSON.parse(savedAttempt);
+            if (parsed && !parsed.isCompleted && parsed.timeRemaining > 0 && parsed.questions && parsed.questions.length > 0) {
+                activeAttempt = parsed;
+                currentStudent = DB.students.find(s => s.id === activeAttempt.studentId) || { id: activeAttempt.studentId, name: activeAttempt.studentName };
+                
+                if (activeAttempt.questions && activeAttempt.questions.length > activeAttempt.currentIndex) {
+                    let answeredPart = activeAttempt.questions.slice(0, activeAttempt.currentIndex);
+                    let remainingPart = activeAttempt.questions.slice(activeAttempt.currentIndex);
+                    activeAttempt.questions = [...answeredPart, ...shuffleArray(remainingPart)];
+                    saveActiveAttemptState();
+                }
+                
+                document.getElementById('quiz-header-teacher').innerText = DB.config.teacherName;
+                document.getElementById('quiz-header-student').innerText = currentStudent.name;
+
+                navigateTo('screen-quiz');
+                renderCurrentQuestion();
+                startQuizTimer();
+                showToast('تنبيه: تم إعادة ترتيب الأسئلة الباقية نظراً لتحديث الصفحة!', 'fa-shuffle', true);
+                return;
+            }
+        } catch(e) {}
+    }
+};
+
+window.onload = fetchCloudData;
+</script>
 </body>
 </html>
+
